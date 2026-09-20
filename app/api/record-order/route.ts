@@ -1,36 +1,122 @@
 import { NextResponse } from "next/server";
 
+// In-memory rate limiting tracker (15 requests per minute per IP)
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const MAX_REQUESTS_PER_WINDOW = 15;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+
+  // Clean up old entries periodically
+  if (rateLimitMap.size > 1000) {
+    rateLimitMap.forEach((value, key) => {
+      if (value.resetAt < now) {
+        rateLimitMap.delete(key);
+      }
+    });
+  }
+
+  if (!record || record.resetAt < now) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  if (record.count >= MAX_REQUESTS_PER_WINDOW) {
+    return true;
+  }
+
+  record.count += 1;
+  return false;
+}
+
+/**
+ * Neutralizes CSV/Spreadsheet Formula Injection (CWE-1236).
+ * Prepends a single quote (') if a string begins with formula triggers: '=', '+', '-', '@', '\t', '\r'.
+ * Truncates values to prevent memory exhaustion and buffer inflation.
+ */
+function sanitizeSpreadsheetField(val: unknown, maxLen = 200): string {
+  if (val === null || val === undefined) return "N/A";
+  let str = String(val).trim();
+  if (!str) return "N/A";
+
+  // Prevent Google Sheets formula interpretation
+  if (/^[=+\-@\t\r]/.test(str)) {
+    str = `'${str}`;
+  }
+
+  return str.slice(0, maxLen);
+}
+
 export async function POST(request: Request) {
   try {
-    const orderData = await request.json();
+    // 1. Basic IP / Origin Rate Limiting
+    const forwardedFor = request.headers.get("x-forwarded-for");
+    const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "127.0.0.1";
 
-    const rawPhone = (orderData.customerPhone || "N/A").toString().trim();
-    // Prefix phone with ' if it starts with '+' or contains numbers to prevent Sheets from interpreting it as formula
-    const customerPhone = rawPhone.startsWith("+") ? `'${rawPhone}` : rawPhone;
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { success: false, error: "Rate limit exceeded. Please try again shortly." },
+        { status: 429 }
+      );
+    }
+
+    // 2. Parse and validate JSON payload
+    let orderData: any;
+    try {
+      orderData = await request.json();
+    } catch {
+      return NextResponse.json(
+        { success: false, error: "Invalid JSON payload" },
+        { status: 400 }
+      );
+    }
+
+    if (!orderData || typeof orderData !== "object") {
+      return NextResponse.json(
+        { success: false, error: "Missing order data" },
+        { status: 400 }
+      );
+    }
+
+    // 3. Strict field sanitization and bounds checking
+    const quantityNum = parseInt(orderData.quantity, 10);
+    const safeQuantity = Number.isFinite(quantityNum) && quantityNum > 0 ? Math.min(quantityNum, 100) : 1;
+
+    const totalAmountNum = parseFloat(orderData.totalAmount);
+    const safeTotalAmount =
+      Number.isFinite(totalAmountNum) && totalAmountNum >= 0
+        ? Math.min(totalAmountNum, 100000)
+        : safeQuantity * 27.0;
 
     const payload = {
-      orderId: orderData.orderId || `ALV-${Date.now().toString().slice(-6)}`,
-      timestamp: orderData.timestamp || new Date().toISOString(),
-      customerName: orderData.customerName || "Customer",
-      customerEmail: orderData.customerEmail || "N/A",
-      customerPhone: customerPhone,
-      shippingAddress: orderData.shippingAddress || "N/A",
-      productName: orderData.productName || "Aluvion Pocket 4K",
-      finish: orderData.finish || "Pearl White",
-      quantity: orderData.quantity || 1,
-      totalAmount: orderData.totalAmount !== undefined ? Number(orderData.totalAmount) : 27.0,
-      currency: orderData.currency || "USD",
-      paymentStatus: orderData.paymentStatus || "PAID",
-      fulfillmentStatus: orderData.fulfillmentStatus || "Unfulfilled",
-      paymentMethod: orderData.paymentMethod || "PayPal",
-      paypalTransactionId: orderData.paypalTransactionId || orderData.hostedButtonId || "ZA4JPKKV2GVFY",
+      orderId: sanitizeSpreadsheetField(
+        orderData.orderId || `ALV-${Date.now().toString().slice(-6)}`,
+        50
+      ),
+      timestamp: new Date().toISOString(),
+      customerName: sanitizeSpreadsheetField(orderData.customerName || "Customer", 100),
+      customerEmail: sanitizeSpreadsheetField(orderData.customerEmail || "N/A", 120),
+      customerPhone: sanitizeSpreadsheetField(orderData.customerPhone || "N/A", 50),
+      shippingAddress: sanitizeSpreadsheetField(orderData.shippingAddress || "N/A", 300),
+      productName: sanitizeSpreadsheetField(orderData.productName || "Aluvion Pocket 4K", 100),
+      finish: sanitizeSpreadsheetField(orderData.finish || "Pearl White", 50),
+      quantity: safeQuantity,
+      totalAmount: safeTotalAmount,
+      currency: "USD",
+      paymentStatus: sanitizeSpreadsheetField(orderData.paymentStatus || "PAID", 30),
+      fulfillmentStatus: sanitizeSpreadsheetField(orderData.fulfillmentStatus || "Unfulfilled", 30),
+      paymentMethod: sanitizeSpreadsheetField(orderData.paymentMethod || "PayPal", 50),
+      paypalTransactionId: sanitizeSpreadsheetField(
+        orderData.paypalTransactionId || orderData.hostedButtonId || "ZA4JPKKV2GVFY",
+        80
+      ),
     };
 
-    console.log("[Aluvion Order Recorded]:", payload);
+    console.log("[Aluvion Order Sanitized & Recorded]:", payload.orderId);
 
-    // Google Sheets Connector
-    // Set GOOGLE_SHEETS_WEBHOOK_URL in environment variables (Vercel or .env.local)
-    // Defaults to the user's active Google Apps Script web app URL
+    // 4. Secure Google Sheets Delivery
     const sheetsWebhookUrl =
       process.env.GOOGLE_SHEETS_WEBHOOK_URL ||
       "https://script.google.com/macros/s/AKfycbyuDjnaBXBL7lLj1uqZdhc3inTq5HqHu-FGsv_oD0E89lHwrYyUQl2uEWnXIjhxZaUXPg/exec";
@@ -49,9 +135,8 @@ export async function POST(request: Request) {
 
         if (response.ok || response.status < 400) {
           sheetsNotified = true;
-          console.log("[Google Sheets Connector] Successfully posted order to Google Sheets");
         } else {
-          console.warn("[Google Sheets Connector] Failed to post to Sheets webhook:", response.status);
+          console.warn("[Google Sheets Connector] Sheets returned status:", response.status);
         }
       } catch (sheetErr) {
         console.error("[Google Sheets Connector Error]:", sheetErr);
@@ -66,7 +151,7 @@ export async function POST(request: Request) {
   } catch (error: any) {
     console.error("[Record Order API Error]:", error);
     return NextResponse.json(
-      { success: false, error: error.message || "Failed to process order" },
+      { success: false, error: "Internal server error" },
       { status: 500 }
     );
   }
