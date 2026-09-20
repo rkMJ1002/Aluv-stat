@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#F8F9FA" rx="4"/>
+  <rect x="16" y="16" width="368" height="368" fill="none" stroke="#E2E4E8" stroke-width="1" rx="4"/>
+
+  <!-- USB-A to USB-C Adapter -->
+  <g transform="translate(140, 140)">
+    <!-- USB-C Male plug -->
+    <rect x="42" y="0" width="36" height="30" rx="6" fill="#D8D4CE" stroke="#121316" stroke-width="1.5"/>
+    <rect x="52" y="8" width="16" height="14" rx="3" fill="#121316"/>
+
+    <!-- Aluminum Adapter Body -->
+    <rect x="20" y="30" width="80" height="70" rx="4" fill="#E2E4E8" stroke="#121316" stroke-width="2"/>
+    <text x="60" y="70" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="11" font-weight="700" fill="#121316">OTG</text>
+
+    <!-- USB-A Female Socket -->
+    <rect x="30" y="100" width="60" height="14" rx="2" fill="#24272E" stroke="#121316" stroke-width="1.5"/>
+    <rect x="42" y="102" width="36" height="4" fill="#FFFFFF"/>
+  </g>
+
+  <text x="200" y="330" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="#121316">USB-A to USB-C Adapter</text>
+</svg>

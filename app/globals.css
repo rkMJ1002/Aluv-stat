@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-page: #FFFFFF;
+  --bg-container: #F8F9FA;
+  --border-color: #E2E4E8;
+  --text-primary: #121316;
+  --text-secondary: #4A505C;
+}
+
+.dark {
+  --bg-page: #121316;
+  --bg-container: #1A1C20;
+  --border-color: #2E323B;
+  --text-primary: #FFFFFF;
+  --text-secondary: #C0C4CC;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom button hover behavior strictly per PRD:
+   Crisp 2px upward lift with 2px offset drop shadow or solid high-contrast inversion within 150ms.
+   No opacity fades. */
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.btn-solid-primary {
+  background-color: #121316;
+  color: #FFFFFF;
+  border: 1px solid #121316;
+}
+
+.btn-solid-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0px #24272E;
+}
+
+.dark .btn-solid-primary {
+  background-color: #FFFFFF;
+  color: #121316;
+  border: 1px solid #FFFFFF;
+}
+
+.dark .btn-solid-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0px #E2E4E8;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #121316;
+  border: 1px solid #121316;
+}
+
+.btn-outline:hover {
+  background-color: #121316;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0px #24272E;
+}
+
+.dark .btn-outline {
+  color: #FFFFFF;
+  border: 1px solid #E2E4E8;
+}
+
+.dark .btn-outline:hover {
+  background-color: #FFFFFF;
+  color: #121316;
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0px #E2E4E8;
+}
+
+/* Technical borders & containers */
+.aluvion-card {
+  background-color: var(--bg-container);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-page);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}

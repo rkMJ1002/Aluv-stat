@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#F8F9FA" rx="4"/>
+  <rect x="16" y="16" width="368" height="368" fill="none" stroke="#E2E4E8" stroke-width="1" rx="4"/>
+
+  <!-- Case Body -->
+  <g transform="translate(80, 80)">
+    <rect x="0" y="0" width="240" height="180" rx="16" fill="#1A1C20" stroke="#121316" stroke-width="2"/>
+    <!-- Hard-shell ribbed contours -->
+    <rect x="20" y="20" width="200" height="140" rx="8" fill="#24272E"/>
+    <line x1="40" y1="40" x2="200" y2="40" stroke="#1A1C20" stroke-width="3"/>
+    <line x1="40" y1="70" x2="200" y2="70" stroke="#1A1C20" stroke-width="3"/>
+    <line x1="40" y1="100" x2="200" y2="100" stroke="#1A1C20" stroke-width="3"/>
+    <line x1="40" y1="130" x2="200" y2="130" stroke="#1A1C20" stroke-width="3"/>
+    <!-- Metal Logo Plate -->
+    <rect x="85" y="75" width="70" height="24" rx="2" fill="#E2E4E8" stroke="#121316" stroke-width="1"/>
+    <text x="120" y="91" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="9" font-weight="700" fill="#121316">ALUVION</text>
+    <!-- Zipper perimeter -->
+    <rect x="-4" y="86" width="248" height="8" rx="2" fill="#E8B4B8"/>
+    <circle cx="0" cy="90" r="6" fill="#D8D4CE"/>
+  </g>
+
+  <text x="200" y="320" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="#121316">Rigid Form-Fit Travel Case</text>
+</svg>

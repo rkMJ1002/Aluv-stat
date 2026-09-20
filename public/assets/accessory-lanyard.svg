@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#F8F9FA" rx="4"/>
+  <rect x="16" y="16" width="368" height="368" fill="none" stroke="#E2E4E8" stroke-width="1" rx="4"/>
+
+  <!-- Braided Cord loop -->
+  <path d="M 120 180 C 120 80, 280 80, 280 180 C 280 260, 220 280, 200 280 C 180 280, 120 260, 120 180 Z" fill="none" stroke="#24272E" stroke-width="8" stroke-linecap="round"/>
+  <!-- Aluminum cinch slider -->
+  <rect x="180" y="220" width="40" height="24" rx="4" fill="#E2E4E8" stroke="#121316" stroke-width="1.5"/>
+  <circle cx="200" cy="232" r="4" fill="#121316"/>
+  <!-- Quick release connector loop -->
+  <path d="M 194 280 L 194 310 C 194 320, 206 320, 206 310 L 206 280" fill="none" stroke="#121316" stroke-width="2"/>
+
+  <text x="200" y="360" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="#121316">Wrist Lanyard</text>
+</svg>

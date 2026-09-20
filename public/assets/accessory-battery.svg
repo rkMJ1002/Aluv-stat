@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#F8F9FA" rx="4"/>
+  <rect x="16" y="16" width="368" height="368" fill="none" stroke="#E2E4E8" stroke-width="1" rx="4"/>
+
+  <!-- Battery 1 -->
+  <g transform="translate(80, 100)">
+    <rect x="0" y="0" width="100" height="150" rx="6" fill="#1A1C20" stroke="#121316" stroke-width="2"/>
+    <rect x="15" y="15" width="70" height="120" fill="#24272E" rx="3"/>
+    <text x="50" y="45" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">ALUVION</text>
+    <text x="50" y="75" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="15" font-weight="700" fill="#E8B4B8">1000mAh</text>
+    <text x="50" y="100" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="500" fill="#C0C4CC">3.7V Li-Ion</text>
+    <!-- Contacts -->
+    <rect x="25" y="-6" width="16" height="6" fill="#D8D4CE"/>
+    <rect x="60" y="-6" width="16" height="6" fill="#D8D4CE"/>
+  </g>
+
+  <!-- Battery 2 -->
+  <g transform="translate(220, 100)">
+    <rect x="0" y="0" width="100" height="150" rx="6" fill="#1A1C20" stroke="#121316" stroke-width="2"/>
+    <rect x="15" y="15" width="70" height="120" fill="#24272E" rx="3"/>
+    <text x="50" y="45" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">ALUVION</text>
+    <text x="50" y="75" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="15" font-weight="700" fill="#E8B4B8">1000mAh</text>
+    <text x="50" y="100" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="500" fill="#C0C4CC">3.7V Li-Ion</text>
+    <rect x="25" y="-6" width="16" height="6" fill="#D8D4CE"/>
+    <rect x="60" y="-6" width="16" height="6" fill="#D8D4CE"/>
+  </g>
+
+  <!-- USB-C charging dock hint -->
+  <rect x="60" y="270" width="280" height="24" rx="4" fill="#E2E4E8" stroke="#A8ACB4" stroke-width="1.5"/>
+  <rect x="180" y="278" width="40" height="8" rx="2" fill="#121316"/>
+
+  <text x="200" y="340" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="#121316">Dual 1000mAh Battery Pack</text>
+</svg>

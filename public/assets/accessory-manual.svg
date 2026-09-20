@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#F8F9FA" rx="4"/>
+  <rect x="16" y="16" width="368" height="368" fill="none" stroke="#E2E4E8" stroke-width="1" rx="4"/>
+
+  <!-- User Manual Booklet -->
+  <g transform="translate(120, 80)">
+    <rect x="0" y="0" width="160" height="220" rx="4" fill="#FFFFFF" stroke="#121316" stroke-width="2"/>
+    <rect x="15" y="15" width="130" height="8" fill="#121316"/>
+    <text x="80" y="60" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="14" font-weight="700" fill="#121316">ALUVION</text>
+    <text x="80" y="80" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#4A505C">QUICK START GUIDE</text>
+    
+    <!-- Camera outline sketch on cover -->
+    <rect x="35" y="105" width="90" height="50" rx="4" fill="none" stroke="#24272E" stroke-width="1.5"/>
+    <circle cx="75" cy="130" r="18" fill="none" stroke="#24272E" stroke-width="1.5"/>
+    <circle cx="75" cy="130" r="8" fill="#E8B4B8"/>
+
+    <!-- Document lines -->
+    <line x1="25" y1="180" x2="135" y2="180" stroke="#E2E4E8" stroke-width="2"/>
+    <line x1="25" y1="195" x2="115" y2="195" stroke="#E2E4E8" stroke-width="2"/>
+  </g>
+
+  <text x="200" y="340" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="#121316">Instruction Manual</text>
+</svg>

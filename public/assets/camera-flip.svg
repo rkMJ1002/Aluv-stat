@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#F8F9FA" rx="4"/>
+  <rect x="20" y="20" width="760" height="460" fill="none" stroke="#E2E4E8" stroke-width="1" rx="4"/>
+
+  <!-- Shadow -->
+  <ellipse cx="400" cy="440" rx="260" ry="16" fill="#24272E" opacity="0.12"/>
+
+  <!-- 180-degree Raised Flip Display (2.4-inch IPS HD) -->
+  <g transform="translate(0, -50)">
+    <!-- Display Housing Frame -->
+    <rect x="240" y="80" width="320" height="170" rx="8" fill="#1A1C20" stroke="#E2E4E8" stroke-width="2"/>
+    <!-- Screen Bezel -->
+    <rect x="252" y="90" width="296" height="150" fill="#121316"/>
+    <!-- Active IPS Display Screen -->
+    <rect x="260" y="96" width="280" height="138" fill="#24272E"/>
+    
+    <!-- Camera viewfinder overlay graphics -->
+    <rect x="280" y="112" width="240" height="106" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="4,4" opacity="0.6"/>
+    <!-- Focus Box -->
+    <rect x="380" y="145" width="40" height="40" fill="none" stroke="#E8B4B8" stroke-width="1.5"/>
+    <circle cx="400" cy="165" r="2" fill="#E8B4B8"/>
+    <!-- OSD Text -->
+    <text x="270" y="112" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#FFFFFF">4K 30FPS</text>
+    <text x="525" y="112" text-anchor="end" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#FFFFFF">ISO 100</text>
+    <text x="270" y="226" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#FFFFFF">[AF-C]</text>
+    <text x="525" y="226" text-anchor="end" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#FFFFFF">BAT 100%</text>
+
+    <!-- Metal Hinge Bracket -->
+    <rect x="370" y="250" width="60" height="24" rx="3" fill="#D8D4CE" stroke="#A8ACB4" stroke-width="1.5"/>
+    <circle cx="382" cy="262" r="3" fill="#121316"/>
+    <circle cx="418" cy="262" r="3" fill="#121316"/>
+  </g>
+
+  <!-- Lower Camera Body -->
+  <rect x="180" y="224" width="440" height="200" rx="14" fill="#FFFFFF" stroke="#D8D4CE" stroke-width="2"/>
+  <path d="M 180 248 L 620 248 L 620 236 C 620 230 614 224 606 224 L 194 224 C 186 224 180 230 180 236 Z" fill="#E2E4E8"/>
+
+  <!-- Shutter & Dials -->
+  <rect x="220" y="214" width="54" height="10" rx="2" fill="#D8D4CE" stroke="#A8ACB4" stroke-width="1"/>
+  <rect x="540" y="214" width="48" height="10" rx="2" fill="#E2E4E8" stroke="#A8ACB4" stroke-width="1"/>
+
+  <!-- Front Lens (Low angle) -->
+  <circle cx="390" cy="330" r="75" fill="#E2E4E8" stroke="#A8ACB4" stroke-width="2"/>
+  <circle cx="390" cy="330" r="60" fill="#24272E" stroke="#121316" stroke-width="1.5"/>
+  <circle cx="390" cy="330" r="45" fill="#121316"/>
+  <circle cx="380" cy="320" r="12" fill="#24272E" opacity="0.6"/>
+
+  <text x="390" y="468" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#4A505C">180-DEGREE FLIP DISPLAY MECHANISM IN HIGH-ANGLE SELFIE POSITION</text>
+</svg>
